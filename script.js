@@ -15,8 +15,7 @@ var upperCaseSet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
 
 ];
 
-var passChart =[];
-
+var passChart = [];
 
 
 
@@ -32,15 +31,15 @@ function writePassword() {
 
 }
 
-Math.random();
+// Math.random();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
-passChart.concat(specCharacterSet);
-  var lastPass =[];
+  // passChart.concat(specCharacterSet);
+   var lastPass = "";
 
   //ask user how many would you like
   var passwordLength = prompt("Enter the length of you password between 8 and 128 characters");
@@ -48,36 +47,37 @@ passChart.concat(specCharacterSet);
   if (passwordLength > 128 || passwordLength < 8) {
     alert("Password must be at least 8 charcters and no more than 128. Please input again.")
     return
+
   }
-
-  var yesNumbers = confirm("Include Numbers? ");
- if (yesNumbers === true){
-   passChart = passChart.concat(numberSet);
- }
+// When user says ok, it will add numbers. If cancel, nothing will be added and the next question will load.
+  var yesNumbers = confirm("Include Numbers?");
+  if (yesNumbers) {
+    passChart = passChart.concat(numberSet);
+  }
+// If user says ok, it will add special characters. 
   var yesSpecialChat = confirm("Includes special characters?");
-
- if (yesSpecialChat === true){
-   passChart = passChart.concat(specCharacterSet);
- }
+  if (yesSpecialChat) {
+    passChart = passChart.concat(specCharacterSet);
+  }
+  // If user says ok, uppercase letters will be added.
   var yesUpperCase = confirm("Includes uppercase?");
-  if (yesUpperCase === true){
+  if (yesUpperCase) {
     passChart = passChart.concat(upperCaseSet);
   }
-  
+// If user says ok, lowercase letters will be added.
   var yesLowerCase = confirm("Includes lowercase?")
- if (yesLowerCase === true){
-   passChart =passChart.concat(lowerCaseSet);
- }
+  if (yesLowerCase) {
+    passChart = passChart.concat(lowerCaseSet);
+  }
+// For loop will pull a random numbers and/or from 0-96 and place them in index
+  for (let i = 0; i < passwordLength; i++) {
+    var charInd = Math.floor(Math.random() * passChart.length);
+    
+    lastPass += passChart[charInd];
 
- for (let i = 0; i < passwordLength; i++) {
-   var charInd = Math.floor(Math.random() * passChart.length);
-   console.log()
-   
-
-   lastPass[i] = passChart[charInd];
-   
- }
-
+  }
+  console.log(lastPass)
+  
   console.log(yesNumbers);
 
   console.log(passwordLength);
@@ -87,7 +87,7 @@ passChart.concat(specCharacterSet);
   console.log(yesUpperCase);
 
   console.log(lowerCaseSet);
-  
+
   return lastPass;
 
 }//End of generatePassword
